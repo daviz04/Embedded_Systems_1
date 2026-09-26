@@ -29,13 +29,13 @@ void main(void)
     }
     result = ADC10MEM; // Get the result from the appropriate register
 //PROCESS THE RESULT
-    if(result>???)// if the input voltage exceeds 1.65V ,(Floor of ((1.65*1024)/3.3)+0.5 = 310)
+    if(result>512)// if the input voltage exceeds 1.65V ,(Floor of ((1.65*1024)/3.3)+0.5 = 512)
     {
-        P1OUT= P1OUT | 0x??; // Make P1.6 go HIGH - LED will go ON
+        P1OUT= P1OUT | 0x40; // Make P1.6 go HIGH - LED will go ON
     }
     else
     {
-        P1OUT= P1OUT & 0x??; // Make P1.6 go LOW - LED will go OFF
+        P1OUT= P1OUT & 0xBF; // Make P1.6 go LOW - LED will go OFF
     }
 //Wait 1 second
     __delay_cycles(1000000);
