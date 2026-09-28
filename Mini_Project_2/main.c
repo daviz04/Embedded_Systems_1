@@ -1,11 +1,16 @@
-#include <msp430.h> 
+#include <msp430.h>
 
 /**
  * main.c
  */
 int main(void)
 {
+
     WDTCTL = WDTPW + WDTHOLD; // Stop watchdog timer
+    //Initiate variables
+    int volt_1;
+    int volt_2;
+    int volt_3;
 
     P1DIR = 0xFD; //Configure P1.1 as an input (Only needed P1.0 and P1.6 as outputs, but configured all unused pins as outputs)
     P1SEL = 0x00; // no special functions for P1 port lines
@@ -23,6 +28,11 @@ int main(void)
     ADC10CTL0 = ADC10CTL0 | 0x0002; //enc set to 1 to allow conversion
     int result;
 
+    //Add values to volt variables
+    volt_1 = 310;
+    volt_2 = 620;
+    volt_3 = 930;
+
     while (1)
     {
         ADC10CTL0 = ADC10CTL0 | 0x0001; //START CONVERSION ON ADC10
@@ -30,15 +40,30 @@ int main(void)
         {
         }
         result = ADC10MEM; // Get the result from the appropriate register
+
         //PROCESS THE RESULT
-        if (result > 512) // if the input voltage exceeds 1.65V ,(Floor of ((1.65*1024)/3.3)+0.5 = 512)
+        // 1. Apagar obligatoriamente ambos LEDs (P1.0 y P1.6) usando AND (&)
+        // La máscara 0xBE (1011 1110) pone ceros en los bits 0 y 6, y unos en el resto.
+        P1OUT &= 0xBE;
+
+        // 2. Evaluar voltajes y encender el LED correspondiente usando OR (|)
+        if ((result >= 0) && (result < volt_1))
         {
-            P1OUT = P1OUT | 0x40; // Make P1.6 go HIGH - LED will go ON
+            // Range 0-1V: do nothing
         }
-        else
+        else if ((result >= volt_1) && (result < volt_2))
         {
-            P1OUT = P1OUT & 0xBF; // Make P1.6 go LOW - LED will go OFF
+            P1OUT |=0x01; // Enciende solo el verde (P1.0)
+        }
+        else if ((result >= volt_2) && (result < volt_3))
+        {
+            P1OUT |=0x40; // Enciende solo el rojo (P1.6)
+        }
+        else if (result >= volt_3)
+        {
+            P1OUT |= 0x41; // Enciende ambos (P1.0 y P1.6)
         }
         //Wait 1 second
         __delay_cycles(1000000);
     }
+}
