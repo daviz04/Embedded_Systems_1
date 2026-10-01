@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Tue Sep 29 13:42:46 2026
+>> Linked Thu Oct  1 15:18:30 2026
 
 OUTPUT FILE NAME:   <Mini_Project_3_A_B.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs"  address: 0000c0b8
@@ -50,7 +50,7 @@ section   page    origin      length       input sections
 
 .text      0    0000c000    000000e8     
                   0000c000    0000005a     main.obj (.text:main)
-                  0000c05a    00000032     main.obj (.text:conversion)
+                  0000c05a    00000032     adc_lib.obj (.text:conversion)
                   0000c08c    0000002c     rts430_eabi.lib : lsl16.asm.obj (.text)
                   0000c0b8    00000014                     : boot.c.obj (.text:_c_int00_noinit_noargs)
                   0000c0cc    0000000a                     : abs.c.obj (.text:abs)
@@ -122,7 +122,8 @@ MODULE SUMMARY
        Module             code   ro data   rw data
        ------             ----   -------   -------
     .\
-       main.obj           140    0         0      
+       main.obj           90     0         0      
+       adc_lib.obj        50     0         0      
     +--+------------------+------+---------+---------+
        Total:             140    0         0      
                                                   
