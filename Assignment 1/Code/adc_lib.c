@@ -48,9 +48,9 @@ void send_LCD_char(char letra){
     send_LCD(letra & 0x0F);
 }
 
-void send_LCD(int info){
+void send_LCD(char info){
     P2OUT |= 0x01; //Activate RS bit high
-    P2OUT |= 0x02; //Activate EN bit with mask 0x02
+    P2OUT |= 0x02; //Activate EN bit high
     P2OUT &= 0x03; //Every bus is low and the first 2 bits remain their state
     P2OUT |= (info << 2);
     __delay_cycles(100); //1 ms

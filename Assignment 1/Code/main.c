@@ -13,7 +13,7 @@ int main(void)
     //Initiate variables
     int P0_result;
     int high_tmpt = 215; //Result of conversion of 21°C into ADC value;
-    int info = 1;
+    char letter = 'M';
 
 
     // Configure P1.0
@@ -24,7 +24,7 @@ int main(void)
 
     //Initiate LCD Screen
     init_LCD();
-    send_LCD_char(info);
+    send_LCD_char(letter);
 
     while (1)
     {

@@ -11,7 +11,7 @@
 int conversion(int channel_selected);
 int air_duct_actuator();
 void init_LCD();
-void send_LCD(int info);
+void send_LCD(char letter);
 void send_LCD_char(char letter);
 
 
