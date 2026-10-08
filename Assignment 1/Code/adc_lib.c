@@ -25,3 +25,36 @@ int conversion(int channel_selected)
 
     return result;
 }
+
+void init_LCD()
+{
+    // Configure entire P2 as outputs
+    P2DIR = 0xFF;
+
+    P2SEL = 0x00; // no special functions for P2 port lines
+    P2IE = 0x00; // no interrupts for P2 port lines
+
+    //Initiate P2OUT to 0's
+    P2OUT = 0x00;
+}
+// Función para imprimir una letra completa (8 bits)
+void send_LCD_char(char letra){
+    // 1. Aislar y enviar la primera mitad (High Nibble)
+    // Desplazamos los 4 bits de la izquierda hacia la derecha para que la función los acepte
+    send_LCD(letra >> 4);
+
+    // 2. Aislar y enviar la segunda mitad (Low Nibble)
+    // Usamos una máscara lógica para ignorar la parte alta y enviar solo los 4 bits de la derecha
+    send_LCD(letra & 0x0F);
+}
+
+void send_LCD(int info){
+    P2OUT |= 0x01; //Activate RS bit high
+    P2OUT |= 0x02; //Activate EN bit with mask 0x02
+    P2OUT &= 0x03; //Every bus is low and the first 2 bits remain their state
+    P2OUT |= (info << 2);
+    __delay_cycles(100); //1 ms
+
+    P2OUT &= 0xFD; //Desactivate EN bit with mask 0xFD
+    __delay_cycles(200); //2 ms
+}
