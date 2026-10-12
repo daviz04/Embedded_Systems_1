@@ -1,11 +1,5 @@
 #include <msp430.h> 
 #include "adc_lib.h"
-
-/**
- * main.c
- */
-
-
 int main(void)
 {
     WDTCTL = WDTPW + WDTHOLD; // Stop watchdog timer
@@ -24,7 +18,7 @@ int main(void)
 
     //Initiate LCD Screen
     init_LCD();
-    send_LCD_char(letter);
+    send_LCD_char(letter, 1);
 
     while (1)
     {

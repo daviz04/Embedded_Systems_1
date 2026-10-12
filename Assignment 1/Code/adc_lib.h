@@ -11,8 +11,7 @@
 int conversion(int channel_selected);
 int air_duct_actuator();
 void init_LCD();
-void send_LCD(char letter);
-void send_LCD_char(char letter);
-
-
+void send_Command_LCD(char letter);
+void send_Data_LCD(char letter);
+void send_LCD_char(char letter, int is_text);
 #endif /* ADC_LIB_H_ */
