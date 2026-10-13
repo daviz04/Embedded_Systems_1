@@ -6,6 +6,7 @@
  */
 #include "adc_lib.h"
 #include <msp430.h>
+
 int conversion(int channel_selected)
 {
     ADC10CTL0 &= 0xFFFD; // enc set to 0 to allow the 16 bit registers to be set
@@ -39,43 +40,46 @@ void init_LCD()
     // Let the lcd screen turn on
     __delay_cycles(50000);
 
-
     // 3. Secuencia de Despertar (Aún en modo 8 bits, enviamos solo nibbles directos)
-        send_Command_LCD(0x03);
-        __delay_cycles(5000);
-        send_Command_LCD(0x03);
-        __delay_cycles(200);
-        send_Command_LCD(0x03);
-        __delay_cycles(200);
+    send_Command_LCD(0x03);
+    __delay_cycles(5000);
+    send_Command_LCD(0x03);
+    __delay_cycles(200);
+    send_Command_LCD(0x03);
+    __delay_cycles(200);
 
-        // 4. Cambiar oficialmente a modo 4 bits
-        send_Command_LCD(0x02);
-        __delay_cycles(200);
+    // 4. Cambiar oficialmente a modo 4 bits
+    send_Command_LCD(0x02);
+    __delay_cycles(200);
 
-        // 5. Ahora que está en 4 bits, enviamos los comandos completos de 8 bits
-        send_LCD_char(0x28, 0); // Function set: Interfaz 4-bit, 2 líneas, fuente 5x7
-        send_LCD_char(0x0C, 0); // Display On/Off: Enciende la pantalla, apaga el cursor
-        send_LCD_char(0x01, 0); // Clear display: Borra la memoria y vuelve al inicio
-        __delay_cycles(2000);   // Clear display tarda 1.64ms, requiere una pausa más larga[cite: 48]
-        send_LCD_char(0x06, 0); // Entry mode set: El cursor se moverá hacia la derecha[cite: 48]
+    // 5. Ahora que está en 4 bits, enviamos los comandos completos de 8 bits
+    send_LCD_char(0x28, 0); // Function set: Interfaz 4-bit, 2 líneas, fuente 5x7
+    send_LCD_char(0x0C, 0); // Display On/Off: Enciende la pantalla, apaga el cursor
+    send_LCD_char(0x01, 0); // Clear display: Borra la memoria y vuelve al inicio
+    __delay_cycles(2000); // Clear display tarda 1.64ms, requiere una pausa más larga
+    send_LCD_char(0x06, 0); // Entry mode set: El cursor se moverá hacia la derecha
+
 }
 
 // Función para imprimir una letra completa (8 bits)
-void send_LCD_char(char letra, int is_data){
+void send_LCD_char(char letra, int is_data)
+{
 
-    switch(is_data){
+    switch (is_data)
+    {
 
     case 0:
-    // 1. Aislar y enviar la primera mitad (High Nibble)
-    // Desplazamos los 4 bits de la izquierda hacia la derecha para que la función los acepte
-    send_Command_LCD(letra >> 4);
+        // 1. Aislar y enviar la primera mitad (High Nibble)
+        // Desplazamos los 4 bits de la izquierda hacia la derecha para que la función los acepte
+        send_Command_LCD(letra >> 4);
 
-    // 2. Aislar y enviar la segunda mitad (Low Nibble)
-    // Usamos una máscara lógica para ignorar la parte alta y enviar solo los 4 bits de la derecha
-    send_Command_LCD(letra & 0x0F);
-    break;
+        // 2. Aislar y enviar la segunda mitad (Low Nibble)
+        // Usamos una máscara lógica para ignorar la parte alta y enviar solo los 4 bits de la derecha
+        send_Command_LCD(letra & 0x0F);
+        break;
 
     case 1:
+        // Same but sending data
         send_Data_LCD(letra >> 4);
         send_Data_LCD(letra & 0x0F);
         break;
@@ -85,10 +89,14 @@ void send_LCD_char(char letra, int is_data){
     }
 }
 
-void send_Command_LCD(char info){
+void send_Command_LCD(char info)
+{
+    P2OUT = 0x00; //Reset P2OUT
+    __delay_cycles(200);
     P2OUT &= 0xFE; //Desactivate RS bit (low)
-    P2OUT &= 0x03; // Clean the data buses
+    __delay_cycles(200);
     P2OUT |= 0x02; //Activate EN bit high -> Sends the info
+    __delay_cycles(200);
     P2OUT |= (info << 2); // Place  the data HiGH NIBBLE  for the display on the data lines
     __delay_cycles(100); // 1 ms
 
@@ -96,13 +104,74 @@ void send_Command_LCD(char info){
     __delay_cycles(200); //2 ms
 }
 
-void send_Data_LCD(char info){
-    P2OUT |= 0x01; //Activate RS bit high
-    P2OUT &= 0x03; // Clean the data buses
-    P2OUT |= 0x02; //Activate EN bit high -> Sends the info
-    P2OUT |= (info << 2); // Place  the data HiGH NIBBLE  for the display on the data lines
+void send_Data_LCD(char info)
+{
+    P2OUT = 0x00; //Reset P2OUT
+    __delay_cycles(200);
+    P2OUT |= 0x01; //Activate RS bit high -> Sends the info
+    __delay_cycles(200);
+    P2OUT |= 0x02; //Activate EN bit high
+    __delay_cycles(200);
+    P2OUT |= (info << 2); //Place  the data HiGH NIBBLE  for the display on the data lines
     __delay_cycles(100); // 1 ms
 
     P2OUT &= 0xFD; //Desactivate EN bit with mask 0xFD
     __delay_cycles(200); //2 ms
+}
+
+void digit_separation(int temp, char *temp_chars)
+{
+
+    //Variables
+    int temp_1;
+    int temp_2;
+    char char_temp_1;
+    char char_temp_2;
+    char degree_1 = 0xDF; // '°' in ASCII
+    char degree_2 = 0x43; // 'C in ASCII
+    char end = '\n';
+
+    if (temp > 9)
+    {
+        //Logic
+        temp_1 = temp / 10; // Get first digit
+        char_temp_1 = temp_1 + 0x30; // Transform into a char character adding 0x30
+
+        temp_2 = temp % 10; // Get second digit
+        char_temp_2 = temp_2 + 0x30; // Transform into a char character adding 0x30
+
+        // Save chars in the array
+        temp_chars[0] = char_temp_1;
+        temp_chars[1] = char_temp_2;
+        temp_chars[2] = degree_1;
+        temp_chars[3] = degree_2;
+        temp_chars[4] = end;
+    }
+    else
+    {
+        //Logic
+        char_temp_1 = temp + 0x30; // Transform into a char character adding 0x30
+
+        //Save chars in the array
+        temp_chars[0] = char_temp_1;
+        temp_chars[1] = degree_1;
+        temp_chars[2] = degree_2;
+        temp_chars[3] = end;
+    }
+}
+
+void clean_screen()
+{
+    send_LCD_char(0x01, 0); // Comand to clean screen
+    __delay_cycles(2000);   // delay
+}
+
+void print_tag()
+{
+    send_LCD_char('T', 1);
+    send_LCD_char('e', 1);
+    send_LCD_char('m', 1);
+    send_LCD_char('p', 1);
+    send_LCD_char(':', 1);
+    send_LCD_char(' ', 1);
 }
