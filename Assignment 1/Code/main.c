@@ -7,7 +7,7 @@ int main(void)
     //Initiate variables
     long P0_result;
     int high_tmpt = 215; //Result of conversion of 21°C into ADC value;
-    char temp_chars[5]; // 2 spaces for temperatura, 2 for °C chars and 1 for "\n" symbol
+    char temp_chars[5]; // 2 spaces for temperature, 2 for °C chars and 1 for "\n" symbol
     long temp;
     int i;
 
@@ -16,6 +16,9 @@ int main(void)
 
     P1SEL = 0x00; // no special functions for P1 port lines
     P1IE = 0x00; // no interrupts for P1 port lines
+
+    //Initiate stepper motor
+    stepper_motor_init();
 
     //Initiate LCD Screen
     init_LCD();

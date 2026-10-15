@@ -17,5 +17,6 @@ void send_LCD_char(char letter, int is_text);
 void digit_separation(int temp, char *temp_chars);
 void clean_screen();
 void print_tag();
+void stepper_motor_init();
 
 #endif /* ADC_LIB_H_ */

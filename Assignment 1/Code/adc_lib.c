@@ -175,3 +175,11 @@ void print_tag()
     send_LCD_char(':', 1);
     send_LCD_char(' ', 1);
 }
+
+void stepper_motor_init(){
+    P1DIR = 0x0E;  // P2.0 (direction), P2.1 (enable) and  and P2.3 (Step) as outputs
+    TA0CCR0 |= 500 - 1; // Timer 0 to count 499 pulses
+    TA0CCTL0 |= CCIE; // Enable Timer Interrupt
+    TA0CTL |= 0x0220; // Input correct configuration of TASSEL(SMCLK) and MC1 (continuous mode) TA0CTL
+    _BIS_SR(GIE);
+}
