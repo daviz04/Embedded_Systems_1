@@ -18,5 +18,8 @@ void digit_separation(int temp, char *temp_chars);
 void clean_screen();
 void print_tag();
 void stepper_motor_init();
+void open_air_duct();
+void close_air_duct();
+
 
 #endif /* ADC_LIB_H_ */

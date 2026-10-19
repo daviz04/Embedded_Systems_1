@@ -176,10 +176,45 @@ void print_tag()
     send_LCD_char(' ', 1);
 }
 
-void stepper_motor_init(){
-    P1DIR = 0x0E;  // P2.0 (direction), P2.1 (enable) and  and P2.3 (Step) as outputs
+void stepper_motor_init()
+{
+    P1DIR = 0x0E; // P1.1 (direction), P1.2 (enable) and  and P1.3 (Step) as outputs
     TA0CCR0 |= 500 - 1; // Timer 0 to count 499 pulses
     TA0CCTL0 |= CCIE; // Enable Timer Interrupt
-    TA0CTL |= 0x0220; // Input correct configuration of TASSEL(SMCLK) and MC1 (continuous mode) TA0CTL
+    TA0CTL |= 0x0210; // Input correct configuration of TASSEL(SMCLK) and MC1 (continuous mode) TA0CTL
     _BIS_SR(GIE);
+}
+
+void open_air_duct()
+{
+    // funcion de abrir air duct
+    // Mucho calor: Habilitar motor poniendo P1.2 (EN) en Bajo (0)
+    P1OUT &= 0xFB;
+
+    // Define direction of P1.1 (DIR) --> In this case will be 0
+    P1OUT &= 0xFD; // Reset the bit to put a 0
+    __delay_cycles(50000);
+
+    //Apagar motor poniendo enable en alto
+    P1OUT |= 0x04;
+}
+void close_air_duct()
+{
+    // Mucho frio: Habilitar motor poniendo P1.2 (EN) en Bajo (0)
+    P1OUT &= 0xFB;
+
+    // Define direction of P1.1 (DIR) --> In this case will be 1
+    P1OUT |= 0x02; // Add a 1 to put a 1
+
+    __delay_cycles(50000);
+
+    //Apagar motor poniendo enable en alto
+    P1OUT |= 0x04;
+
+}
+
+#pragma vector=TIMER0_A0_VECTOR
+__interrupt void Timer0_A0(void)
+{
+    P1OUT ^= BIT3; // BIT3 (P1.3), NO BIT0 (it was in the presentation like that)
 }

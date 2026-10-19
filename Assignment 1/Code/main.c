@@ -1,5 +1,6 @@
 #include <msp430.h> 
 #include "adc_lib.h"
+#include <stdbool.h>
 int main(void)
 {
     WDTCTL = WDTPW + WDTHOLD; // Stop watchdog timer
@@ -10,6 +11,7 @@ int main(void)
     char temp_chars[5]; // 2 spaces for temperature, 2 for °C chars and 1 for "\n" symbol
     long temp;
     int i;
+    bool air_duct_flag = false;
 
     // Configure P1.0
     P1DIR = 0xFE; //Everything else will be output
@@ -22,6 +24,9 @@ int main(void)
 
     //Initiate LCD Screen
     init_LCD();
+
+    // Initiate Stepper motor
+    stepper_motor_init();
 
     while (1)
     {
@@ -44,15 +49,23 @@ int main(void)
             i++;
         }
 
-        if (P0_result > high_tmpt)
+        if (P0_result > high_tmpt && air_duct_flag == false)
         {
-            // funcion de abrir air duct
+            open_air_duct();
+            air_duct_flag = true;
+
+        }
+        else if (P0_result <= high_tmpt && air_duct_flag == true)
+        {
+
+            close_air_duct();
+            air_duct_flag = false;
         }
         else
         {
-            // funcion de cerrar air duct
         }
 
-        __delay_cycles(10000);
+        __delay_cycles(100000);
     }
 }
+
