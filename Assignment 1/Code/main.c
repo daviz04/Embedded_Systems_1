@@ -8,7 +8,7 @@ int main(void)
     //Initiate variables
     long P0_result;
     int high_tmpt = 215; //Result of conversion of 21°C into ADC value;
-    char temp_chars[5]; // 2 spaces for temperature, 2 for °C chars and 1 for "\n" symbol
+    char temp_chars[6]; // 3 spaces for temperature, 2 for °C chars and 1 for "\n" symbol
     long temp;
     int i;
     bool air_duct_flag = false;
@@ -25,9 +25,6 @@ int main(void)
     //Initiate LCD Screen
     init_LCD();
 
-    // Initiate Stepper motor
-    stepper_motor_init();
-
     while (1)
     {
         //Start conversion
@@ -37,8 +34,12 @@ int main(void)
         clean_screen(); //Reset Screen
         print_tag(); // Print "Temp: "
 
-        //Calculate temperature in real time
-        temp = (P0_result * 100) / 1023;
+        // Calibrate to 100 the potentiometer
+        temp = (P0_result * 100) / 960; // A little bit under the theorical value because it just reach 94
+        if (temp >= 100)
+        {
+            temp = 100; // Max 100 degrees
+        }
 
         // Show temperatures in the LCD Screen
         digit_separation(temp, temp_chars);
@@ -52,6 +53,7 @@ int main(void)
         if (P0_result > high_tmpt && air_duct_flag == false)
         {
             open_air_duct();
+
             air_duct_flag = true;
 
         }
@@ -65,7 +67,7 @@ int main(void)
         {
         }
 
-        __delay_cycles(100000);
+        __delay_cycles(90000); // Time tested to work fine with the motor, screen and logic
     }
 }
 
