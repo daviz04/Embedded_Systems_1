@@ -199,25 +199,39 @@ void stepper_motor_init()
 
 void open_air_duct()
 {
-    P1OUT &= ~0x02;     // Dirección 0 en P1.1 (Abrir)
-    toggle_count = 100; // 100 inversiones = 50 pasos exactos = 90 grados
-    P1OUT &= ~0x04;     // Turn on motor (P1.2 EN = 0)
+    int s;
+    P1OUT &= 0xFD;         // Dirección 0 en P1.1 (Abrir)
+    P1OUT &= 0xFB;         // Habilitar motor poniendo P1.2 (EN) en BAJO (0)
+    __delay_cycles(1000);  // Pausa breve para activar el driver
 
-    // Wait until the 50 steps are complete
-    while (toggle_count > 0)
+    // Dar 50 pasos distribuidos en 2 segundos exactos
+    for (s = 0; s < 50; s++)
     {
+        P1OUT |= BIT3;        // Pulso STEP (P1.3) en ALTO
+        __delay_cycles(20000); // 20 ms en alto
+        P1OUT &= ~BIT3;       // Pulso STEP (P1.3) en BAJO
+        __delay_cycles(20000); // 20 ms en bajo
     }
+
+    P1OUT |= 0x04;         // Apagar motor poniendo P1.2 (EN) en ALTO (1)
 }
 void close_air_duct()
 {
-    P1OUT |= 0x02;      // direction 1 en P1.1 (close)
-    toggle_count = 100; // 100 inversiones = 50 pasos exactos = 90 grados
-    P1OUT &= ~0x04;     // Turn on motor (P1.2 EN = 0)
+    int s;
+    P1OUT |= 0x02;         // Dirección 1 en P1.1 (Cerrar)
+    P1OUT &= 0xFB;         // Habilitar motor poniendo P1.2 (EN) en BAJO (0)
+    __delay_cycles(1000);  // Pausa breve para activar el driver
 
-    // Wait until the 50 steps are complete
-    while (toggle_count > 0)
+    // Dar 50 pasos distribuidos en 2 segundos exactos
+    for (s = 0; s < 50; s++)
     {
+        P1OUT |= BIT3;        // Pulso STEP (P1.3) en ALTO
+        __delay_cycles(20000); // 20 ms en alto
+        P1OUT &= ~BIT3;       // Pulso STEP (P1.3) en BAJO
+        __delay_cycles(20000); // 20 ms en bajo
     }
+
+    P1OUT |= 0x04;         // Apagar motor poniendo P1.2 (EN) en ALTO (1)
 }
 
 #pragma vector=TIMER0_A0_VECTOR

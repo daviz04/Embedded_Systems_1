@@ -35,7 +35,7 @@ int main(void)
         print_tag(); // Print "Temp: "
 
         // Calibrate to 100 the potentiometer
-        temp = (P0_result * 100) / 960; // A little bit under the theorical value because it just reach 94
+        temp = (P0_result * 100) / 960; // A little bit under the theoretical value because it just reach 94
         if (temp >= 100)
         {
             temp = 100; // Max 100 degrees
@@ -53,7 +53,6 @@ int main(void)
         if (P0_result > high_tmpt && air_duct_flag == false)
         {
             open_air_duct();
-
             air_duct_flag = true;
 
         }
@@ -67,7 +66,7 @@ int main(void)
         {
         }
 
-        __delay_cycles(90000); // Time tested to work fine with the motor, screen and logic
+        __delay_cycles(10000); // Time tested to work fine with the motor, screen and logic
     }
 }
 
