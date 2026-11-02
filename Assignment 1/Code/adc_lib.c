@@ -55,7 +55,7 @@ void init_LCD()
     __delay_cycles(200);
 
     // Now in 4-bits mode send the entire data (8-bits data)
-    send_LCD_char(0x28, 0); // Function set: Interface 4-bit, 2 lines, fuente 5x7
+    send_LCD_char(0x28, 0); // Function set: Interface 4-bit, 2 lines
     send_LCD_char(0x0C, 0); // Display On/Off
     send_LCD_char(0x01, 0); // Clear display: Cleans the memory and reset
     __delay_cycles(2000); // Clear display delay is longer
@@ -95,14 +95,14 @@ void send_Command_LCD(char info)
 {
     P2OUT = 0x00; //Reset P2OUT
     __delay_cycles(200);
-    P2OUT &= 0xFE; //Desactivate RS bit (low)
+    P2OUT &= 0xFE; //Deactivate RS bit (low)
     __delay_cycles(200);
     P2OUT |= 0x02; //Activate EN bit high -> Sends the info
     __delay_cycles(200);
     P2OUT |= (info << 2); // Place  the data HiGH NIBBLE  for the display on the data lines
     __delay_cycles(100); // 1 ms
 
-    P2OUT &= 0xFD; //Desactivate EN bit with mask 0xFD
+    P2OUT &= 0xFD; //Deactivate EN bit with mask 0xFD
     __delay_cycles(200); //2 ms
 }
 
@@ -117,7 +117,7 @@ void send_Data_LCD(char info)
     P2OUT |= (info << 2); //Place  the data HiGH NIBBLE  for the display on the data lines
     __delay_cycles(100); // 1 ms
 
-    P2OUT &= 0xFD; //Desactivate EN bit with mask 0xFD
+    P2OUT &= 0xFD; //Deactivate EN bit with mask 0xFD
     __delay_cycles(200); //2 ms
 }
 
@@ -173,7 +173,7 @@ void digit_separation(int temp, char *temp_chars)
 
 void clean_screen()
 {
-    send_LCD_char(0x01, 0); // Comand to clean screen
+    send_LCD_char(0x01, 0); // Command to clean screen
     __delay_cycles(2000);   // delay
 }
 
@@ -200,38 +200,38 @@ void stepper_motor_init()
 void open_air_duct()
 {
     int s;
-    P1OUT &= 0xFD;         // Dirección 0 en P1.1 (Abrir)
-    P1OUT &= 0xFB;         // Habilitar motor poniendo P1.2 (EN) en BAJO (0)
-    __delay_cycles(1000);  // Pausa breve para activar el driver
+    P1OUT &= 0xFD;         // Direction 0 in P1.1 (Open)
+    P1OUT &= 0xFB;         // Turn on motor setting P1.2 (EN) to low (0)
+    __delay_cycles(1000);  // Short delay to activate the driver
 
-    // Dar 50 pasos distribuidos en 2 segundos exactos
+    // 50 steps in 2 seconds
     for (s = 0; s < 50; s++)
     {
-        P1OUT |= BIT3;        // Pulso STEP (P1.3) en ALTO
-        __delay_cycles(20000); // 20 ms en alto
-        P1OUT &= ~BIT3;       // Pulso STEP (P1.3) en BAJO
-        __delay_cycles(20000); // 20 ms en bajo
+        P1OUT |= BIT3;        // Pulse STEP in P1.3 to high
+        __delay_cycles(20000); // 20 ms on high
+        P1OUT &= ~BIT3;       // Pulse STEP P1.3 to low
+        __delay_cycles(20000); // 20 ms on low
     }
 
-    P1OUT |= 0x04;         // Apagar motor poniendo P1.2 (EN) en ALTO (1)
+    P1OUT |= 0x04;         // Turn off motor setting P1.2 (EN) to high (1)
 }
 void close_air_duct()
 {
     int s;
-    P1OUT |= 0x02;         // Dirección 1 en P1.1 (Cerrar)
-    P1OUT &= 0xFB;         // Habilitar motor poniendo P1.2 (EN) en BAJO (0)
-    __delay_cycles(1000);  // Pausa breve para activar el driver
+    P1OUT |= 0x02;         // Direction 1 in P1.1 (Close)
+    P1OUT &= 0xFB;         // Turn on motor setting P1.2 (EN) to low (0)
+    __delay_cycles(1000);  // Short delay to activate the driver
 
-    // Dar 50 pasos distribuidos en 2 segundos exactos
+    // 50 steps in 2 seconds
     for (s = 0; s < 50; s++)
     {
-        P1OUT |= BIT3;        // Pulso STEP (P1.3) en ALTO
-        __delay_cycles(20000); // 20 ms en alto
-        P1OUT &= ~BIT3;       // Pulso STEP (P1.3) en BAJO
-        __delay_cycles(20000); // 20 ms en bajo
+        P1OUT |= BIT3;        // Pulse STEP in P1.3 to high
+        __delay_cycles(20000); // 20 ms on high
+        P1OUT &= ~BIT3;       // Pulse STEP P1.3 to low
+        __delay_cycles(20000); // 20 ms on low
     }
 
-    P1OUT |= 0x04;         // Apagar motor poniendo P1.2 (EN) en ALTO (1)
+    P1OUT |= 0x04;         // Turn off motor setting P1.2 (EN) to high (1)
 }
 
 #pragma vector=TIMER0_A0_VECTOR
