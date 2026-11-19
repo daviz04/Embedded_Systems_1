@@ -1,11 +1,11 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date             : Tue Nov 17 13:30:36 2026
+| Date             : Thu Nov 19 14:09:11 2026
 | Host             : S-6J13R04 running 64-bit major release  (build 9200)
 | Command          : report_power -file digital_circuit_ex_1_power_routed.rpt -pb digital_circuit_ex_1_power_summary_routed.pb -rpx digital_circuit_ex_1_power_routed.rpx
 | Design           : digital_circuit_ex_1
-| Device           : xc7a35tcpg236-1
+| Device           : xc7s50csga324-1
 | Design State     : routed
 | Grade            : commercial
 | Process          : typical
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 1.342        |
+| Total On-Chip Power (W)  | 3.135        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 1.265        |
-| Device Static (W)        | 0.077        |
-| Effective TJA (C/W)      | 5.0          |
-| Max Ambient (C)          | 78.3         |
-| Junction Temperature (C) | 31.7         |
+| Dynamic (W)              | 3.055        |
+| Device Static (W)        | 0.081        |
+| Effective TJA (C/W)      | 4.9          |
+| Max Ambient (C)          | 69.5         |
+| Junction Temperature (C) | 40.5         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,12 +52,12 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Slice Logic    |     0.010 |        4 |       --- |             --- |
-|   LUT as Logic |     0.010 |        3 |     20800 |            0.01 |
-| Signals        |     0.062 |        8 |       --- |             --- |
-| I/O            |     1.193 |        8 |       106 |            7.55 |
-| Static Power   |     0.077 |          |           |                 |
-| Total          |     1.342 |          |           |                 |
+| Slice Logic    |     0.009 |        4 |       --- |             --- |
+|   LUT as Logic |     0.009 |        3 |     32600 |           <0.01 |
+| Signals        |     0.041 |        8 |       --- |             --- |
+| I/O            |     3.005 |        8 |       210 |            3.81 |
+| Static Power   |     0.081 |          |           |                 |
+| Total          |     3.135 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -67,18 +67,16 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.100 |       0.088 |      0.012 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     0.096 |       0.083 |      0.013 |       NA    | Unspecified | NA         |
-| Vcco33    |       3.300 |     0.086 |       0.085 |      0.001 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.083 |       0.066 |      0.017 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     0.123 |       0.110 |      0.013 |       NA    | Unspecified | NA         |
+| Vcco33    |       3.300 |     0.847 |       0.846 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vcco18    |       1.800 |     0.416 |       0.415 |      0.001 |       NA    | Unspecified | NA         |
+| Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccbram   |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 
@@ -107,7 +105,7 @@ Table of Contents
 
 +-----------------------+--------------------------+
 | Ambient Temp (C)      | 25.0                     |
-| ThetaJA (C/W)         | 5.0                      |
+| ThetaJA (C/W)         | 4.9                      |
 | Airflow (LFM)         | 250                      |
 | Heat Sink             | medium (Medium Profile)  |
 | ThetaSA (C/W)         | 4.6                      |
@@ -134,7 +132,7 @@ Table of Contents
 +----------------------+-----------+
 | Name                 | Power (W) |
 +----------------------+-----------+
-| digital_circuit_ex_1 |     1.265 |
+| digital_circuit_ex_1 |     3.055 |
 +----------------------+-----------+
 
 

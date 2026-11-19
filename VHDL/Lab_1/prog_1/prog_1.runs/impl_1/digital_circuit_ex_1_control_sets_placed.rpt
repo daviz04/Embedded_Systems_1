@@ -1,11 +1,11 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date         : Tue Nov 17 13:30:21 2026
+| Date         : Thu Nov 19 14:08:57 2026
 | Host         : S-6J13R04 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file digital_circuit_ex_1_control_sets_placed.rpt
 | Design       : digital_circuit_ex_1
-| Device       : xc7a35t
+| Device       : xc7s50
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
 Control Set Information

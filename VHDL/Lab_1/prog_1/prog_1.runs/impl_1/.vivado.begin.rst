@@ -1,15 +1,50 @@
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="DAVIDROBERTOTAPIACAI" Host="S-6J13R04" Pid="1504" HostCore="20" HostMemory="016853479424">
+    <Process Command="vivado.bat" Owner="DAVIDROBERTOTAPIACAI" Host="S-6J13R04" Pid="6556" HostCore="20" HostMemory="016853479424">
     </Process>
 </ProcessHandle>
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="DAVIDROBERTOTAPIACAI" Host="S-6J13R04" Pid="18920" HostCore="20" HostMemory="016853479424">
+    <Process Command="vivado.bat" Owner="DAVIDROBERTOTAPIACAI" Host="S-6J13R04" Pid="12568" HostCore="20" HostMemory="016853479424">
     </Process>
 </ProcessHandle>
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="DAVIDROBERTOTAPIACAI" Host="S-6J13R04" Pid="5136" HostCore="20" HostMemory="016853479424">
+    <Process Command="vivado.bat" Owner="DAVIDROBERTOTAPIACAI" Host="S-6J13R04" Pid="15804" HostCore="20" HostMemory="016853479424">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado.bat" Owner="DAVIDROBERTOTAPIACAI" Host="S-6J13R04" Pid="4928" HostCore="20" HostMemory="016853479424">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado.bat" Owner="DAVIDROBERTOTAPIACAI" Host="S-6J13R04" Pid="5104" HostCore="20" HostMemory="016853479424">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado.bat" Owner="DAVIDROBERTOTAPIACAI" Host="S-6J13R04" Pid="19604" HostCore="20" HostMemory="016853479424">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado.bat" Owner="DAVIDROBERTOTAPIACAI" Host="S-6J13R04" Pid="12432" HostCore="20" HostMemory="016853479424">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado.bat" Owner="DAVIDROBERTOTAPIACAI" Host="S-6J13R04" Pid="18000" HostCore="20" HostMemory="016853479424">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado.bat" Owner="DAVIDROBERTOTAPIACAI" Host="S-6J13R04" Pid="11572" HostCore="20" HostMemory="016853479424">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado.bat" Owner="DAVIDROBERTOTAPIACAI" Host="S-6J13R04" Pid="13208" HostCore="20" HostMemory="016853479424">
     </Process>
 </ProcessHandle>
