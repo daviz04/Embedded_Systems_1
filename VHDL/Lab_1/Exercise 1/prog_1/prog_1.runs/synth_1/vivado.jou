@@ -3,8 +3,8 @@
 # SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
 # IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
 # SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-# Start of session at: Thu Nov 19 14:38:02 2026
-# Process ID         : 19040
+# Start of session at: Tue Nov 24 12:25:17 2026
+# Process ID         : 10612
 # Current directory  : C:/Users/DAVIDROBERTOTAPIACAI/Documents/Embedded_Systems/VHDL/Lab_1/Exercise 1/prog_1/prog_1.runs/synth_1
 # Command line       : vivado.exe -log digital_circuit_ex_1.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source digital_circuit_ex_1.tcl
 # Log file           : C:/Users/DAVIDROBERTOTAPIACAI/Documents/Embedded_Systems/VHDL/Lab_1/Exercise 1/prog_1/prog_1.runs/synth_1/digital_circuit_ex_1.vds
@@ -19,6 +19,6 @@
 # Host memory        : 16853 MB
 # Swap memory        : 2550 MB
 # Total Virtual      : 19403 MB
-# Available Virtual  : 6616 MB
+# Available Virtual  : 5747 MB
 #-----------------------------------------------------------
 source digital_circuit_ex_1.tcl -notrace

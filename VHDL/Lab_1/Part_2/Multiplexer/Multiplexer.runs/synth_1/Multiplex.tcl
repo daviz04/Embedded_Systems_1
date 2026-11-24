@@ -58,8 +58,11 @@ if {$::dispatch::connected} {
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 5
 set_param general.usePosixSpawnForFork 1
-set_param xicom.use_bs_reader 1
+set_param synth.incrementalSynthesisCache C:/Users/DAVIDROBERTOTAPIACAI/Documents/Embedded_Systems/VHDL/Lab_1/Part_2/Multiplexer/.Xil/Vivado-3224-S-6J13R04/incrSyn
+set_param checkpoint.writeSynthRtdsInDcp 1
 set_msg_config -id {Common 17-41} -limit 10000000
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7s50csga324-1
 
@@ -69,7 +72,7 @@ set_param synth.vivado.isSynthRun true
 set_property webtalk.parent_dir C:/Users/DAVIDROBERTOTAPIACAI/Documents/Embedded_Systems/VHDL/Lab_1/Part_2/Multiplexer/Multiplexer.cache/wt [current_project]
 set_property parent.project_path C:/Users/DAVIDROBERTOTAPIACAI/Documents/Embedded_Systems/VHDL/Lab_1/Part_2/Multiplexer/Multiplexer.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
-set_property target_language Verilog [current_project]
+set_property target_language VHDL [current_project]
 set_property ip_output_repo c:/Users/DAVIDROBERTOTAPIACAI/Documents/Embedded_Systems/VHDL/Lab_1/Part_2/Multiplexer/Multiplexer.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }

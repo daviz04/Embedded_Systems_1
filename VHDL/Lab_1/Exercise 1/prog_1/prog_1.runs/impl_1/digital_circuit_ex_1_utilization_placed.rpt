@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date         : Thu Nov 19 14:39:28 2026
+| Date         : Tue Nov 24 12:26:14 2026
 | Host         : S-6J13R04 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file digital_circuit_ex_1_utilization_placed.rpt -pb digital_circuit_ex_1_utilization_placed.pb
 | Design       : digital_circuit_ex_1

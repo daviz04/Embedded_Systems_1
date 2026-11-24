@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date         : Thu Nov 19 15:22:31 2026
+| Date         : Tue Nov 24 12:09:34 2026
 | Host         : S-6J13R04 running 64-bit major release  (build 9200)
 | Command      : report_timing_summary -max_paths 10 -routable_nets -report_unconstrained -file Multiplex_timing_summary_routed.rpt -pb Multiplex_timing_summary_routed.pb -rpx Multiplex_timing_summary_routed.rpx -warn_on_violation
 | Design       : Multiplex
@@ -221,19 +221,19 @@ Slack:                    inf
                             (output port)
   Path Group:             (none)
   Path Type:              Max at Slow Process Corner
-  Data Path Delay:        10.196ns  (logic 5.101ns (50.032%)  route 5.095ns (49.968%))
+  Data Path Delay:        9.352ns  (logic 5.092ns (54.442%)  route 4.261ns (45.558%))
   Logic Levels:           3  (IBUF=1 LUT6=1 OBUF=1)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    K2                                                0.000     0.000 r  S[1] (IN)
+    R2                                                0.000     0.000 r  S[1] (IN)
                          net (fo=0)                   0.000     0.000    S[1]
-    K2                   IBUF (Prop_ibuf_I_O)         1.457     1.457 r  S_IBUF[1]_inst/O
-                         net (fo=1, routed)           2.216     3.674    S_IBUF[1]
-    SLICE_X65Y23         LUT6 (Prop_lut6_I3_O)        0.124     3.798 r  Y_OBUF_inst_i_1/O
-                         net (fo=1, routed)           2.878     6.676    Y_OBUF
-    G1                   OBUF (Prop_obuf_I_O)         3.520    10.196 r  Y_OBUF_inst/O
-                         net (fo=0)                   0.000    10.196    Y
+    R2                   IBUF (Prop_ibuf_I_O)         1.447     1.447 r  S_IBUF[1]_inst/O
+                         net (fo=1, routed)           1.603     3.050    S_IBUF[1]
+    SLICE_X65Y22         LUT6 (Prop_lut6_I3_O)        0.124     3.174 r  Y_OBUF_inst_i_1/O
+                         net (fo=1, routed)           2.658     5.832    Y_OBUF
+    G1                   OBUF (Prop_obuf_I_O)         3.520     9.352 r  Y_OBUF_inst/O
+                         net (fo=0)                   0.000     9.352    Y
     G1                                                                r  Y (OUT)
   -------------------------------------------------------------------    -------------------
 
@@ -244,25 +244,25 @@ Slack:                    inf
 Min Delay Paths
 --------------------------------------------------------------------------------------
 Slack:                    inf
-  Source:                 A
+  Source:                 S[0]
                             (input port)
   Destination:            Y
                             (output port)
   Path Group:             (none)
   Path Type:              Min at Fast Process Corner
-  Data Path Delay:        2.721ns  (logic 1.480ns (54.382%)  route 1.241ns (45.618%))
+  Data Path Delay:        2.561ns  (logic 1.490ns (58.175%)  route 1.071ns (41.825%))
   Logic Levels:           3  (IBUF=1 LUT6=1 OBUF=1)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    T2                                                0.000     0.000 r  A (IN)
-                         net (fo=0)                   0.000     0.000    A
-    T2                   IBUF (Prop_ibuf_I_O)         0.214     0.214 r  A_IBUF_inst/O
-                         net (fo=1, routed)           0.375     0.589    A_IBUF
-    SLICE_X65Y23         LUT6 (Prop_lut6_I1_O)        0.045     0.634 r  Y_OBUF_inst_i_1/O
-                         net (fo=1, routed)           0.866     1.500    Y_OBUF
-    G1                   OBUF (Prop_obuf_I_O)         1.221     2.721 r  Y_OBUF_inst/O
-                         net (fo=0)                   0.000     2.721    Y
+    T1                                                0.000     0.000 r  S[0] (IN)
+                         net (fo=0)                   0.000     0.000    S[0]
+    T1                   IBUF (Prop_ibuf_I_O)         0.224     0.224 r  S_IBUF[0]_inst/O
+                         net (fo=1, routed)           0.322     0.546    S_IBUF[0]
+    SLICE_X65Y22         LUT6 (Prop_lut6_I4_O)        0.045     0.591 r  Y_OBUF_inst_i_1/O
+                         net (fo=1, routed)           0.749     1.340    Y_OBUF
+    G1                   OBUF (Prop_obuf_I_O)         1.221     2.561 r  Y_OBUF_inst/O
+                         net (fo=0)                   0.000     2.561    Y
     G1                                                                r  Y (OUT)
   -------------------------------------------------------------------    -------------------
 
